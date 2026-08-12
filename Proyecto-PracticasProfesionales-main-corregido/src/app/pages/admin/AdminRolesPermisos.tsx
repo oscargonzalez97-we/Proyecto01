@@ -35,7 +35,7 @@ const ROLES_INFORMATIVOS: RolInformativo[] = [
     descripcion:
       "Gestiona usuarios, catalogos, configuracion, seguridad y reportes administrativos del sistema.",
     modulos: [
-      "Dashboard Admin",
+      "Inicio del Administrador",
       "Gestion de Usuarios",
       "Roles / Permisos",
       "Catalogos",
@@ -102,7 +102,7 @@ const ROLES_INFORMATIVOS: RolInformativo[] = [
     nombre: "Alumno",
     descripcion:
       "Consulta su proceso, sube documentos, selecciona empresas y da seguimiento a sus practicas.",
-    modulos: ["Dashboard Alumno", "Documentos", "Padron Empresarial", "Seguimiento", "Descargas"],
+    modulos: ["Inicio del Alumno", "Documentos", "Padron Empresarial", "Seguimiento", "Descargas"],
     acciones: [
       "Subir documentos",
       "Consultar validaciones",
@@ -115,7 +115,7 @@ const ROLES_INFORMATIVOS: RolInformativo[] = [
     nombre: "Unidad Receptora",
     descripcion: "Gestiona su documentacion, convenio, plan de trabajo y vacantes.",
     modulos: [
-      "Dashboard Unidad Receptora",
+      "Inicio de la Unidad Receptora",
       "Documentacion legal",
       "Convenio",
       "Plan de trabajo",
@@ -133,7 +133,7 @@ const ROLES_INFORMATIVOS: RolInformativo[] = [
     nombre: "Direccion",
     descripcion:
       "Consulta estadisticas, reportes y seguimiento institucional del proceso de practicas.",
-    modulos: ["Dashboard Direccion", "Estadisticas", "Reportes", "Exportaciones"],
+    modulos: ["Inicio de Dirección", "Estadisticas", "Reportes", "Exportaciones"],
     acciones: [
       "Consultar estadisticas generales",
       "Filtrar informacion institucional",

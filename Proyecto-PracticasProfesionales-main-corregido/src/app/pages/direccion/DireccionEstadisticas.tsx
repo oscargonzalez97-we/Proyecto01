@@ -236,7 +236,7 @@ export function DireccionEstadisticas() {
             </h1>
 
             <p className="mt-2 max-w-3xl text-sm leading-6 text-gray-500">
-              Consulta ejecutiva del avance de prácticas profesionales por carrera, asignación,
+              Avance general del programa de prácticas profesionales por carrera, asignación,
               convenios, vacantes, incidencias y convocatorias.
             </p>
 

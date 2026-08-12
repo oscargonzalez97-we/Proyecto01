@@ -63,7 +63,7 @@ function obtenerUsuarioSesion(): UsuarioSesion | null {
 function getNav(role: string): NavItem[] {
   if (role === "alumno") {
     return [
-      { label: "Dashboard", icon: LayoutDashboard, path: "/alumno" },
+      { label: "Inicio del Alumno", icon: LayoutDashboard, path: "/alumno" },
       { label: "Documentacion", icon: FileText, path: "/alumno/documentos" },
       { label: "Padron Empresarial", icon: Building2, path: "/alumno/padron" },
       { label: "Mis Reportes", icon: ClipboardList, path: "/alumno/reportes" },
@@ -77,7 +77,7 @@ function getNav(role: string): NavItem[] {
 
   if (role === "coordinador") {
     return [
-      { label: "Dashboard", icon: LayoutDashboard, path: "/coordinador" },
+      { label: "Inicio del Coordinador de Prácticas", icon: LayoutDashboard, path: "/coordinador" },
       { label: "Gestion de Alumnos", icon: Users, path: "/coordinador/alumnos" },
       { label: "Revisión de Documentos", icon: FileCheck, path: "/coordinador/documentos" },
       { label: "Asignaciones", icon: ClipboardList, path: "/coordinador/asignaciones" },
@@ -90,7 +90,7 @@ function getNav(role: string): NavItem[] {
 
   if (role === "unidad") {
     return [
-      { label: "Dashboard", icon: LayoutDashboard, path: "/unidad" },
+      { label: "Inicio de la Unidad Receptora", icon: LayoutDashboard, path: "/unidad" },
       { label: "Perfil Empresa", icon: Building2, path: "/unidad/perfil" },
       { label: "Plan de trabajo", icon: Briefcase, path: "/unidad/ofertas" },
       { label: "Alumnos", icon: Users, path: "/unidad/alumnos" },
@@ -102,7 +102,7 @@ function getNav(role: string): NavItem[] {
 
   if (role === "coord-unidades") {
     return [
-      { label: "Dashboard", icon: LayoutDashboard, path: "/coord-unidades" },
+      { label: "Inicio del Coordinador de Unidades Receptoras", icon: LayoutDashboard, path: "/coord-unidades" },
       { label: "Empresas", icon: Building2, path: "/coord-unidades/empresas" },
       { label: "Expedientes", icon: FileCheck, path: "/coord-unidades/empresas/expediente" },
       { label: "Convenios", icon: FileText, path: "/coord-unidades/convenios" },
@@ -114,7 +114,7 @@ function getNav(role: string): NavItem[] {
 
   if (role === "admin") {
     return [
-      { label: "Dashboard", icon: LayoutDashboard, path: "/admin" },
+      { label: "Inicio del Administrador", icon: LayoutDashboard, path: "/admin" },
       { label: "Gestion de Usuarios", icon: Users, path: "/admin/usuarios" },
       { label: "Roles y Permisos", icon: Shield, path: "/admin/roles" },
       { label: "Catalogos", icon: ClipboardList, path: "/admin/catalogos" },
@@ -126,7 +126,7 @@ function getNav(role: string): NavItem[] {
 
   if (role === "asesor") {
     return [
-      { label: "Dashboard", icon: LayoutDashboard, path: "/asesor" },
+      { label: "Inicio del Asesor Interno", icon: LayoutDashboard, path: "/asesor" },
       { label: "Alumnos Asignados", icon: Users, path: "/asesor/alumnos" },
       { label: "Reportes", icon: BarChart3, path: "/asesor/reportes" },
       { label: "Evaluaciones", icon: Star, path: "/asesor/observaciones" },
@@ -136,7 +136,7 @@ function getNav(role: string): NavItem[] {
 
   if (role === "direccion") {
     return [
-      { label: "Dashboard Ejecutivo", icon: LayoutDashboard, path: "/direccion" },
+      { label: "Inicio de Dirección", icon: LayoutDashboard, path: "/direccion" },
       { label: "Estadisticas", icon: BarChart3, path: "/direccion/estadisticas" },
       { label: "Reportes", icon: FileText, path: "/direccion/reportes" },
     ];

@@ -59,7 +59,7 @@ export function CoordUnidadesDashboard() {
     } catch (err) {
       console.error(err);
       setError(
-        "No se pudo cargar la información del dashboard. Intenta nuevamente.",
+        "No se pudo cargar la información de inicio. Intenta nuevamente.",
       );
     } finally {
       setCargando(false);
@@ -148,7 +148,7 @@ export function CoordUnidadesDashboard() {
     },
     {
       title: "Padrón empresarial",
-      subtitle: "Pre-padrón y publicadas",
+      subtitle: "Empresas en revisión y publicadas",
       icon: ClipboardList,
       path: "/coord-unidades/padron",
       iconClass: "text-emerald-700",
@@ -204,7 +204,7 @@ export function CoordUnidadesDashboard() {
           <div className="flex items-start gap-3 rounded-2xl border border-red-200 bg-red-50 px-4 py-3.5 text-sm text-red-700">
             <AlertCircle className="mt-0.5 h-5 w-5 shrink-0" />
             <div className="flex-1">
-              <p className="font-semibold">No fue posible cargar el dashboard</p>
+              <p className="font-semibold">No fue posible cargar la información de inicio</p>
               <p className="mt-0.5 text-red-600">{error}</p>
             </div>
 

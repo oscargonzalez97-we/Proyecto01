@@ -33,7 +33,7 @@ export function CoordinadorDashboard() {
       setDatos(await obtenerDashboardCoordinador());
     } catch (err) {
       console.error(err);
-      setError("No se pudo cargar el dashboard del coordinador.");
+      setError("No se pudo cargar la página de inicio del coordinador.");
     } finally {
       setCargando(false);
     }
@@ -45,10 +45,10 @@ export function CoordinadorDashboard() {
     <div className="space-y-6">
       <div>
         <h1 className="text-2xl font-bold text-[#0d2b5e]">
-          Dashboard - Coordinador de Practicas
+          Inicio del Coordinador de Prácticas
         </h1>
         <p className="text-gray-500 text-sm mt-1">
-          Flujo real de expedientes, seleccion de empresa, asignacion y seguimiento.
+          Seguimiento de expedientes y prácticas.
         </p>
       </div>
 

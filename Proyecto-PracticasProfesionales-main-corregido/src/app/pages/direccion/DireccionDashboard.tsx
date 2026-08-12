@@ -174,15 +174,15 @@ export function DireccionDashboard() {
             <div className="max-w-3xl">
               <div className="mb-3 inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-3 py-1 text-xs font-semibold">
                 <Eye className="h-3.5 w-3.5" />
-                Módulo de consulta institucional
+                Resumen de prácticas profesionales
               </div>
 
               <h1 className="text-2xl font-bold tracking-tight lg:text-3xl">
-                Dashboard Institucional de Prácticas Profesionales
+                Inicio de Dirección
               </h1>
 
               <p className="mt-2 text-sm leading-6 text-blue-100">
-                Consulta ejecutiva para Dirección y Secretaría. Aquí se visualizan indicadores
+                Avance general del programa para Dirección y Secretaría. Aquí se visualizan indicadores
                 generales de alumnos, empresas, convenios y avance institucional.
               </p>
 

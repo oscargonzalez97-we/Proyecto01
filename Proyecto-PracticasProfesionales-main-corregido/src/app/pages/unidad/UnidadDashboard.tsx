@@ -31,7 +31,7 @@ export function UnidadDashboard() {
       setDatos(await obtenerDashboardUnidad());
     } catch (err) {
       console.error(err);
-      setError("No se pudo cargar el dashboard de la unidad receptora.");
+      setError("No se pudo cargar la página de inicio de la unidad receptora.");
     } finally {
       setCargando(false);
     }
@@ -44,7 +44,7 @@ export function UnidadDashboard() {
     <div className="space-y-6">
       <div>
         <h1 className="text-2xl font-bold text-[#0d2b5e]">
-          Dashboard - Unidad Receptora
+          Inicio de la Unidad Receptora
         </h1>
         <p className="text-gray-500 text-sm mt-1">
           {empresa?.nombre_empresa ?? "Unidad receptora"} - {empresa?.estado_empresa ?? "Sin estado"}
