@@ -15,7 +15,7 @@ import type { HorasAlumnoResponse } from "../../../domain/alumno/HorasAlumno";
 import { getApiErrorMessage } from "../../../shared/utils/apiError";
 
 function obtenerIdAlumnoSesion(): number | null {
-  const usuario = localStorage.getItem("usuario");
+  const usuario = sessionStorage.getItem("usuario");
   if (!usuario) return null;
   try {
     const sesion = JSON.parse(usuario);

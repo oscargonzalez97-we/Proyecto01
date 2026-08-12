@@ -18,7 +18,7 @@ const requisitoLabel: Record<string, string> = {
 };
 
 function obtenerIdAlumno() {
-  const raw = localStorage.getItem("usuario");
+  const raw = sessionStorage.getItem("usuario");
   if (!raw) return null;
   try {
     return (JSON.parse(raw) as UsuarioSesion).perfil?.id_alumno ?? null;

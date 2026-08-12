@@ -56,7 +56,7 @@ type UsuarioSesion = {
 };
 
 function obtenerIdEmpresa() {
-  const raw = localStorage.getItem("usuario");
+  const raw = sessionStorage.getItem("usuario");
   if (!raw) return null;
 
   try {

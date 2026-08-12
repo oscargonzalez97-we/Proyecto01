@@ -41,8 +41,10 @@ export function LoginPage() {
         password,
       });
 
-      localStorage.setItem("token", response.access_token);
-      localStorage.setItem("usuario", JSON.stringify(response));
+      localStorage.removeItem("token");
+      localStorage.removeItem("usuario");
+      sessionStorage.setItem("token", response.access_token);
+      sessionStorage.setItem("usuario", JSON.stringify(response));
       sessionStorage.setItem(
         "notificaciones:mostrar-al-iniciar",
         String(response.id_usuario),

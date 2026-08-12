@@ -325,6 +325,68 @@ def _eliminar_registros_alumno(db: Session, id_usuario: int):
     return total_eliminados
 
 
+def _eliminar_registros_usuario_no_alumno(db: Session, id_usuario: int):
+    parametros = {"id_usuario": id_usuario}
+    total_modificados = 0
+
+    def ejecutar(sql: str):
+        nonlocal total_modificados
+        resultado = db.execute(text(sql), parametros)
+        if resultado.rowcount and resultado.rowcount > 0:
+            total_modificados += resultado.rowcount
+
+    referencias_opcionales = [
+        ("alumno_proceso_practica", "creado_por"),
+        ("alumno_proceso_practica", "actualizado_por"),
+        ("asignacion", "asignado_por"),
+        ("bitacora_auditoria", "id_usuario"),
+        ("documento_alumno", "revisado_por"),
+        ("documento_empresa", "revisado_por"),
+        ("documento_vacante", "revisado_por"),
+        ("formato_documento_alumno", "subido_por"),
+        ("formato_empresa", "subido_por"),
+        ("formato_plan_trabajo_vacante", "subido_por"),
+        ("horas_practica", "revisado_por"),
+        ("incidencia_practica", "id_usuario_reportante"),
+        ("liberacion_practica", "emitido_por"),
+        ("participacion_empresa_convocatoria", "revisada_por"),
+        ("reporte_practica", "revisado_por"),
+        ("responsable_empresa", "id_usuario"),
+        ("seleccion_empresa", "revisado_por"),
+        ("solicitud_ampliacion_cupos_vacante", "revisada_por"),
+        ("solicitud_empresa", "revisada_por"),
+        ("vacante", "revisada_por"),
+    ]
+    for tabla, columna in referencias_opcionales:
+        existe = db.execute(
+            text(
+                "SELECT COUNT(*) FROM information_schema.COLUMNS "
+                "WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = :tabla AND COLUMN_NAME = :columna"
+            ),
+            {"tabla": tabla, "columna": columna},
+        ).scalar()
+        if existe:
+            ejecutar(f"UPDATE {tabla} SET {columna} = NULL WHERE {columna} = :id_usuario")
+
+    id_personal = db.execute(
+        text("SELECT id_personal FROM personal_interno WHERE id_usuario = :id_usuario"),
+        parametros,
+    ).scalar()
+    if id_personal is not None:
+        resultado = db.execute(
+            text("UPDATE asignacion SET id_asesor = NULL WHERE id_asesor = :id_personal"),
+            {"id_personal": id_personal},
+        )
+        if resultado.rowcount and resultado.rowcount > 0:
+            total_modificados += resultado.rowcount
+
+    ejecutar("DELETE FROM evaluacion_practica WHERE id_usuario_evaluador = :id_usuario")
+    ejecutar("DELETE FROM observacion_documento_alumno WHERE id_usuario = :id_usuario")
+    ejecutar("DELETE FROM notificacion WHERE id_usuario = :id_usuario")
+    ejecutar("DELETE FROM personal_interno WHERE id_usuario = :id_usuario")
+    return total_modificados
+
+
 def _es_administrador(usuario: UsuarioModel):
     return usuario.rol is not None and usuario.rol.nombre == "Administrador"
 
@@ -365,7 +427,7 @@ def _serializar_usuario(usuario: UsuarioModel, db: Session):
         "debe_cambiar_password": bool(usuario.debe_cambiar_password),
         "tipo_perfil": tipo_perfil,
         "id_perfil": id_perfil,
-        "puede_eliminar_definitivamente": usuario.id_rol == 1 or relaciones["puede_eliminar"],
+        "puede_eliminar_definitivamente": True,
         "relaciones": relaciones["relaciones"],
     }
 
@@ -975,31 +1037,41 @@ def eliminar_usuario_definitivamente(
             "registros_eliminados": registros_eliminados,
         }
 
-    relaciones = obtener_relaciones_usuario(db, id_usuario)
-    if not relaciones["puede_eliminar"]:
+    try:
+        registros_modificados = _eliminar_registros_usuario_no_alumno(db, id_usuario)
+        db.query(UsuarioModel).filter(
+            UsuarioModel.id_usuario == id_usuario
+        ).delete(synchronize_session=False)
+        db.commit()
+    except HTTPException:
+        db.rollback()
+        raise
+    except SQLAlchemyError as error:
+        db.rollback()
         raise HTTPException(
-            status_code=409,
-            detail={
-                "mensaje": (
-                    "Este usuario tiene registros asociados, por lo que no puede eliminarse definitivamente. "
-                    "Puedes desactivarlo para impedir el acceso sin perder historial."
-                ),
-                "relaciones": relaciones["relaciones"],
-            },
-        )
+            status_code=500,
+            detail=(
+                "No se pudo eliminar el usuario de forma segura. "
+                "La transaccion fue revertida y no se realizo ningun cambio."
+            ),
+        ) from error
 
-    db.delete(usuario)
-    db.commit()
     registrar_bitacora(
         db,
         usuario_actual.id_usuario,
         "Eliminar usuario definitivo",
         "usuarios",
-        f"Admin elimino definitivamente el usuario {correo}",
+        (
+            f"Admin elimino definitivamente el usuario {correo} y "
+            f"desvinculo o elimino {registros_modificados} registros asociados."
+        ),
         "usuario",
         id_usuario,
     )
-    return {"mensaje": "Usuario eliminado definitivamente."}
+    return {
+        "mensaje": "Usuario eliminado definitivamente.",
+        "registros_modificados": registros_modificados,
+    }
 
 @router.put("/{id_usuario}", response_model=UsuarioResponse)
 def actualizar_usuario(

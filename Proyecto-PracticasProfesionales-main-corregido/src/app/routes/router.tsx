@@ -91,7 +91,7 @@ function CambiarPasswordInicialPage() {
 
   const usuario = (() => {
     try {
-      return JSON.parse(localStorage.getItem("usuario") ?? "null");
+      return JSON.parse(sessionStorage.getItem("usuario") ?? "null");
     } catch {
       return null;
     }
@@ -140,7 +140,7 @@ function CambiarPasswordInicialPage() {
         ...usuario,
         debe_cambiar_password: false,
       };
-      localStorage.setItem("usuario", JSON.stringify(usuarioActualizado));
+      sessionStorage.setItem("usuario", JSON.stringify(usuarioActualizado));
       setMensaje("Contrasena actualizada correctamente.");
       navigate(obtenerRutaInicioPorRol(usuario.rol, usuario.id_rol), { replace: true });
     } catch (err) {

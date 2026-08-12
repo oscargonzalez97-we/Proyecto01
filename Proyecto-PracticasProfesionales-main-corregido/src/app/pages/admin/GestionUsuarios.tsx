@@ -282,11 +282,6 @@ export function GestionUsuarios() {
   }
 
   async function handleEliminarDefinitivamente(usuario: Usuario) {
-    if (!usuario.puede_eliminar_definitivamente) {
-      alert("Este usuario tiene registros asociados. Solo puede desactivarse.");
-      return;
-    }
-
     const confirmar = window.confirm(
       usuario.id_rol === 1
         ? (
@@ -294,7 +289,11 @@ export function GestionUsuarios() {
             + "documentos, asignaciones, horas, reportes, evaluaciones y notificaciones. "
             + "La operacion se realizara en una sola transaccion y no se puede deshacer. Deseas continuar?"
           )
-        : "Este usuario no tiene registros asociados. Se eliminara definitivamente de la base de datos. Esta accion no se puede deshacer. Deseas continuar?"
+        : (
+            "Se eliminara definitivamente este usuario y su perfil. "
+            + "Las referencias de revision se desvincularan y sus notificaciones, evaluaciones u observaciones propias se eliminaran. "
+            + "Esta accion no se puede deshacer. Deseas continuar?"
+          )
     );
 
     if (!confirmar) return;

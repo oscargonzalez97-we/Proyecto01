@@ -24,7 +24,7 @@ const estadoColor: Record<EstadoHoraUnidad, string> = {
 };
 
 function obtenerIdEmpresa(): number | null {
-  const raw = localStorage.getItem("usuario");
+  const raw = sessionStorage.getItem("usuario");
   if (!raw) return null;
 
   try {

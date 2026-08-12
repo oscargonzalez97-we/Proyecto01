@@ -8,7 +8,7 @@ import type { ColoredStatCard } from "../../../shared/types/ui";
 type UsuarioSesion = { perfil?: { id_empresa?: number } };
 
 function obtenerIdEmpresa() {
-  const raw = localStorage.getItem("usuario");
+  const raw = sessionStorage.getItem("usuario");
   if (!raw) return null;
   try {
     return (JSON.parse(raw) as UsuarioSesion).perfil?.id_empresa ?? null;

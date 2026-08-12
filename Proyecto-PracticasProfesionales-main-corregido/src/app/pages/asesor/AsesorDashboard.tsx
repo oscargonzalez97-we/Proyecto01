@@ -26,7 +26,7 @@ const estadoColor: Record<string, string> = {
 };
 
 function obtenerIdAsesorSesion() {
-  const usuario = localStorage.getItem("usuario");
+  const usuario = sessionStorage.getItem("usuario");
   if (!usuario) return null;
 
   try {

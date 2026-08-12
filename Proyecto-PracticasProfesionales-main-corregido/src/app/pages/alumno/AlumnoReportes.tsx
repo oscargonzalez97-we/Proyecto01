@@ -56,7 +56,7 @@ function esArchivoDocumentoPermitido(archivo: File) {
 }
 
 function obtenerIdAlumno() {
-  const raw = localStorage.getItem("usuario");
+  const raw = sessionStorage.getItem("usuario");
   if (!raw) return null;
 
   try {

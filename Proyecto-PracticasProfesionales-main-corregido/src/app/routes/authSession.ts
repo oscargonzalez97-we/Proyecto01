@@ -19,8 +19,8 @@ export function obtenerRutaInicioPorRol(nombre?: string | null, idRol?: number |
 }
 
 export function obtenerSesionGuardada(): UsuarioSesionAuth | null {
-  const token = localStorage.getItem("token");
-  const usuario = localStorage.getItem("usuario");
+  const token = sessionStorage.getItem("token");
+  const usuario = sessionStorage.getItem("usuario");
   if (!token || !usuario) return null;
 
   try {
@@ -43,7 +43,7 @@ export function obtenerRutaInicioSesionGuardada() {
 }
 
 export function cerrarSesionLocal() {
+  sessionStorage.clear();
   localStorage.removeItem("token");
   localStorage.removeItem("usuario");
-  sessionStorage.clear();
 }

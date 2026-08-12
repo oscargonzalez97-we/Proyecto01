@@ -50,7 +50,7 @@ type NavItem = {
 };
 
 function obtenerUsuarioSesion(): UsuarioSesion | null {
-  const usuario = localStorage.getItem("usuario");
+  const usuario = sessionStorage.getItem("usuario");
   if (!usuario) return null;
 
   try {

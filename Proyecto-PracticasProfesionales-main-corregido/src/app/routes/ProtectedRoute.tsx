@@ -7,8 +7,8 @@ interface ProtectedRouteProps {
 
 export function ProtectedRoute({ allowedRoles }: ProtectedRouteProps) {
   const location = useLocation();
-  const token = localStorage.getItem("token");
-  const usuarioGuardado = localStorage.getItem("usuario");
+  const token = sessionStorage.getItem("token");
+  const usuarioGuardado = sessionStorage.getItem("usuario");
 
   if (!token || !usuarioGuardado) {
     cerrarSesionLocal();

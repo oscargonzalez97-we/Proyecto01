@@ -16,7 +16,7 @@ import type { ConfiguracionSistema } from "../../../domain/configuracion/Configu
 import type { SeguimientoAlumnoResponse } from "../../../domain/seguimiento/SeguimientoPracticas";
 
 function obtenerSesion(): AuthSession | null {
-  const raw = localStorage.getItem("usuario");
+  const raw = sessionStorage.getItem("usuario");
   if (!raw) return null;
 
   try {

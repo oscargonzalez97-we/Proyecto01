@@ -56,7 +56,7 @@ type ElegibilidadAcademica = {
 };
 
 function obtenerIdAlumnoSesion() {
-  const usuario = localStorage.getItem("usuario");
+  const usuario = sessionStorage.getItem("usuario");
   if (!usuario) return null;
 
   try {

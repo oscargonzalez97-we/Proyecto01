@@ -16,7 +16,7 @@ import { gestionAlumnosUnidadUseCase } from "../../dependencies";
 import type { AlumnoUnidad } from "../../../domain/unidad/AlumnoUnidad";
 
 function obtenerIdEmpresaSesion(): number | null {
-  const usuario = localStorage.getItem("usuario");
+  const usuario = sessionStorage.getItem("usuario");
   if (!usuario) return null;
   try {
     const sesion = JSON.parse(usuario);
